@@ -24,13 +24,13 @@ requirements = [
 ]
 
 setup(
-    name='pychrome',
+    name='py3chrome',
     version=version,
     description="A Python Package for the Google Chrome Dev Protocol",
     long_description=readme,
     author="fate0",
     author_email='fate0@fatezero.org',
-    url='https://github.com/fate0/pychrome',
+    url='https://github.com/ostorlab/py3chrome',
     packages=find_packages(),
     package_dir={},
     entry_points={
