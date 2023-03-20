@@ -35,13 +35,13 @@ def test_normal_callmethod():
 
     tab.start()
     result = tab.Page.navigate(url="http://www.fatezero.org")
-    assert result['frameId']
+    assert result["frameId"]
 
     time.sleep(1)
     result = tab.Runtime.evaluate(expression="document.domain")
 
-    assert result['result']['type'] == 'string'
-    assert result['result']['value'] == 'www.fatezero.org'
+    assert result["result"]["type"] == "string"
+    assert result["result"]["value"] == "www.fatezero.org"
     tab.stop()
 
 
@@ -145,7 +145,9 @@ def test_get_event_listener():
 
     assert not tab.get_listener("Network.requestWillBeSent")
     # notice this
-    assert tab.Network.requestWillBeSent != tab.get_listener("Network.requestWillBeSent")
+    assert tab.Network.requestWillBeSent != tab.get_listener(
+        "Network.requestWillBeSent"
+    )
 
     tab.stop()
 

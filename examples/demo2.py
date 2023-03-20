@@ -3,8 +3,9 @@ import pychrome
 browser = pychrome.Browser(url="http://127.0.0.1:9222")
 tab = browser.new_tab()
 
+
 def request_will_be_sent(**kwargs):
-    print("loading: %s" % kwargs.get('request').get('url'))
+    print("loading: %s" % kwargs.get("request").get("url"))
 
 
 tab.set_listener("Network.requestWillBeSent", request_will_be_sent)

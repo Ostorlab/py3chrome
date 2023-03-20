@@ -11,7 +11,7 @@ urls = [
     "http://fatezero.org",
     "http://blog.fatezero.org",
     "http://github.com/fate0",
-    "http://github.com/fate0/pychrome"
+    "http://github.com/fate0/pychrome",
 ]
 
 
@@ -38,7 +38,7 @@ class EventHandler(object):
                 try:
                     data = self.tab.Page.captureScreenshot()
                     with open("%s.png" % time.time(), "wb") as fd:
-                        fd.write(base64.b64decode(data['data']))
+                        fd.write(base64.b64decode(data["data"]))
                 finally:
                     self.tab.stop()
 
@@ -83,8 +83,8 @@ def main():
         tab.stop()
         browser.close_tab(tab)
 
-    print('Done')
+    print("Done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

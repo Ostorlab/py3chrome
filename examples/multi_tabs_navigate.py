@@ -26,24 +26,24 @@ class EventHandler(object):
     def request_intercepted(self, interceptionId, request, **kwargs):
         if self.is_first_request:
             self.is_first_request = False
-            headers = request.get('headers', {})
-            headers['Test-key'] = 'test-value'
+            headers = request.get("headers", {})
+            headers["Test-key"] = "test-value"
             self.tab.Network.continueInterceptedRequest(
                 interceptionId=interceptionId,
                 headers=headers,
-                method='POST',
-                postData="hello post data: %s" % time.time()
+                method="POST",
+                postData="hello post data: %s" % time.time(),
             )
         else:
-            self.tab.Network.continueInterceptedRequest(
-                interceptionId=interceptionId
-            )
+            self.tab.Network.continueInterceptedRequest(interceptionId=interceptionId)
 
     def frame_stopped_loading(self, frameId):
         if self.start_frame == frameId:
             self.tab.Page.stopLoading()
-            result = self.tab.Runtime.evaluate(expression="document.documentElement.outerHTML")
-            self.html_content = result.get('result', {}).get('value', "")
+            result = self.tab.Runtime.evaluate(
+                expression="document.documentElement.outerHTML"
+            )
+            self.html_content = result.get("result", {}).get("value", "")
             print(self.html_content)
             self.tab.stop()
 
@@ -90,8 +90,8 @@ def main():
         tab.stop()
         browser.close_tab(tab)
 
-    print('Done')
+    print("Done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
