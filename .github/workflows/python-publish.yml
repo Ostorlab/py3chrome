@@ -28,10 +28,6 @@ jobs:
       with:
         key: ${{ secrets.WORKFLOW_SSH_KEY }}
         known_hosts: ${{ secrets.KNOWN_HOSTS }}
-    - name: Init and update data submodule.
-      run: |
-        git submodule init
-        git submodule update
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
