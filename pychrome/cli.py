@@ -8,13 +8,21 @@ import pychrome
 
 
 click.disable_unicode_literals_warning = True
-CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
+CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
 
 shared_options = [
-    click.option("--host", "-t", type=click.STRING, default='127.0.0.1', help="HTTP frontend host"),
-    click.option("--port", "-p", type=click.INT, default=9222, help="HTTP frontend port"),
-    click.option("--secure", "-s", is_flag=True, help="HTTPS/WSS frontend")
+    click.option(
+        "--host",
+        "-t",
+        type=click.STRING,
+        default="127.0.0.1",
+        help="HTTP frontend host",
+    ),
+    click.option(
+        "--port", "-p", type=click.INT, default=9222, help="HTTP frontend port"
+    ),
+    click.option("--secure", "-s", is_flag=True, help="HTTPS/WSS frontend"),
 ]
 
 
@@ -106,5 +114,5 @@ def version(host, port, secure):
         click.echo(e)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
