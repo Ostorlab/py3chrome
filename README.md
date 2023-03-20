@@ -60,7 +60,7 @@ $ docker run -it --rm --cap-add=SYS_ADMIN -p9222:9222 fate0/headless-chrome
 
 ## Getting Started
 
-```python
+```
 import pychrome
 
 # create a browser instance
@@ -69,9 +69,11 @@ browser = pychrome.Browser(url="http://127.0.0.1:9222")
 # create a tab
 tab = browser.new_tab()
 
+
 # register callback if you want
 def request_will_be_sent(**kwargs):
     print("loading: %s" % kwargs.get('request').get('url'))
+
 
 tab.Network.requestWillBeSent = request_will_be_sent
 
@@ -96,7 +98,7 @@ browser.close_tab(tab)
 
 or (alternate syntax)
 
-```python
+```
 import pychrome
 
 browser = pychrome.Browser(url="http://127.0.0.1:9222")
