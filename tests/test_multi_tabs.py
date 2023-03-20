@@ -47,14 +47,14 @@ def test_normal_callmethod():
     for tab in tabs:
         tab.start()
         result = tab.Page.navigate(url="http://www.fatezero.org")
-        assert result['frameId']
+        assert result["frameId"]
 
     time.sleep(3)
 
     for tab in tabs:
         result = tab.Runtime.evaluate(expression="document.domain")
-        assert result['result']['type'] == 'string'
-        assert result['result']['value'] == 'www.fatezero.org'
+        assert result["result"]["type"] == "string"
+        assert result["result"]["value"] == "www.fatezero.org"
         tab.stop()
 
 

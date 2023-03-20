@@ -12,7 +12,7 @@ urls = [
     "http://fatezero.org",
     "http://blog.fatezero.org",
     "http://github.com/fate0",
-    "http://github.com/fate0/pychrome"
+    "http://github.com/fate0/pychrome",
 ]
 
 
@@ -40,7 +40,7 @@ class EventHandler(object):
                     data = self.tab.Page.printToPDF()
 
                     with open("%s.pdf" % time.time(), "wb") as fd:
-                        fd.write(base64.b64decode(data['data']))
+                        fd.write(base64.b64decode(data["data"]))
                 finally:
                     self.tab.stop()
 
@@ -85,8 +85,8 @@ def main():
         tab.stop()
         browser.close_tab(tab.id)
 
-    print('Done')
+    print("Done")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

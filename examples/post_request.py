@@ -3,9 +3,8 @@ import time
 import urllib
 
 
-
 class ChromiumClient(object):
-    """ Client to interact with Chromium """
+    """Client to interact with Chromium"""
 
     def __init__(self):
         self.browser = pychrome.Browser(url="http://127.0.0.1:9222")
@@ -15,13 +14,10 @@ class ChromiumClient(object):
 
         event_handler = EventHandler()
 
-        event_handler.set_token('asdkflj497564dsklf')
-        event_handler.set_post_data({
-            'param1': 'value1',
-            'param2': 'value2'
-        })
+        event_handler.set_token("asdkflj497564dsklf")
+        event_handler.set_post_data({"param1": "value1", "param2": "value2"})
 
-        url_pattern_object = {'urlPattern': '*fate0*'}
+        url_pattern_object = {"urlPattern": "*fate0*"}
         self.tab.Network.setRequestInterception(patterns=[url_pattern_object])
 
         self.tab.Network.requestIntercepted = event_handler.on_request_intercepted
@@ -31,7 +27,7 @@ class ChromiumClient(object):
         self.tab.Network.enable()
         self.tab.Page.enable()
 
-        self.tab.Page.navigate(url='https://github.com/fate0/pychrome')
+        self.tab.Page.navigate(url="https://github.com/fate0/pychrome")
 
         self.tab.wait(5)
         self.tab.stop()
@@ -56,7 +52,7 @@ class EventHandler(object):
         self.post_data = pd
 
     def on_request_intercepted(self, **kwargs):
-        new_args = {'interceptionId': kwargs['interceptionId']}
+        new_args = {"interceptionId": kwargs["interceptionId"]}
 
         if self.is_first_request:
             # Modify first request only, following are media/static
@@ -64,24 +60,26 @@ class EventHandler(object):
             self.is_first_request = False
 
             extra_headers = {
-                'Requested-by': 'Chromium',
-                'Authorization': 'Token ' + self.token
+                "Requested-by": "Chromium",
+                "Authorization": "Token " + self.token,
             }
 
-            request = kwargs.get('request')
-            request['headers'].update(extra_headers)
+            request = kwargs.get("request")
+            request["headers"].update(extra_headers)
 
-            new_args.update({
-                'url': request['url'],
-                'method': 'POST',
-                'headers': request['headers'],
-                'postData': urllib.urlencode(self.post_data)
-            })
+            new_args.update(
+                {
+                    "url": request["url"],
+                    "method": "POST",
+                    "headers": request["headers"],
+                    "postData": urllib.urlencode(self.post_data),
+                }
+            )
 
         self.tab.Network.continueInterceptedRequest(**new_args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     client = ChromiumClient()
 
     client.do_post()

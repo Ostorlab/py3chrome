@@ -23,8 +23,10 @@ class Browser(object):
             self._tabs = self._all_tabs[self.dev_url]
 
     def new_tab(self, url=None, timeout=None):
-        url = url or ''
-        rp = requests.put("%s/json/new?%s" % (self.dev_url, url), json=True, timeout=timeout)
+        url = url or ""
+        rp = requests.put(
+            "%s/json/new?%s" % (self.dev_url, url), json=True, timeout=timeout
+        )
         tab = Tab(**rp.json())
         self._tabs[tab.id] = tab
         return tab
@@ -33,13 +35,16 @@ class Browser(object):
         rp = requests.get("%s/json" % self.dev_url, json=True, timeout=timeout)
         tabs_map = {}
         for tab_json in rp.json():
-            if tab_json['type'] != 'page':  # pragma: no cover
+            if tab_json["type"] != "page":  # pragma: no cover
                 continue
 
-            if tab_json['id'] in self._tabs and self._tabs[tab_json['id']].status != Tab.status_stopped:
-                tabs_map[tab_json['id']] = self._tabs[tab_json['id']]
+            if (
+                tab_json["id"] in self._tabs
+                and self._tabs[tab_json["id"]].status != Tab.status_stopped
+            ):
+                tabs_map[tab_json["id"]] = self._tabs[tab_json["id"]]
             else:
-                tabs_map[tab_json['id']] = Tab(**tab_json)
+                tabs_map[tab_json["id"]] = Tab(**tab_json)
 
         self._tabs = tabs_map
         return list(self._tabs.values())
@@ -48,7 +53,9 @@ class Browser(object):
         if isinstance(tab_id, Tab):
             tab_id = tab_id.id
 
-        rp = requests.get("%s/json/activate/%s" % (self.dev_url, tab_id), timeout=timeout)
+        rp = requests.get(
+            "%s/json/activate/%s" % (self.dev_url, tab_id), timeout=timeout
+        )
         return rp.text
 
     def close_tab(self, tab_id, timeout=None):
@@ -67,6 +74,6 @@ class Browser(object):
         return rp.json()
 
     def __str__(self):
-        return '<Browser %s>' % self.dev_url
+        return "<Browser %s>" % self.dev_url
 
     __repr__ = __str__

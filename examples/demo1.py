@@ -6,9 +6,11 @@ browser = pychrome.Browser(url="http://127.0.0.1:9222")
 # create a tab
 tab = browser.new_tab()
 
+
 # register callback if you want
 def request_will_be_sent(**kwargs):
-    print("loading: %s" % kwargs.get('request').get('url'))
+    print("loading: %s" % kwargs.get("request").get("url"))
+
 
 tab.Network.requestWillBeSent = request_will_be_sent
 
