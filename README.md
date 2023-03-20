@@ -60,7 +60,7 @@ $ docker run -it --rm --cap-add=SYS_ADMIN -p9222:9222 fate0/headless-chrome
 
 ## Getting Started
 
-``` python
+```python
 import pychrome
 
 # create a browser instance
@@ -96,7 +96,7 @@ browser.close_tab(tab)
 
 or (alternate syntax)
 
-``` python
+```python
 import pychrome
 
 browser = pychrome.Browser(url="http://127.0.0.1:9222")
