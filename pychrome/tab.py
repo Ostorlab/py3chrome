@@ -128,7 +128,7 @@ class Tab(object):
                     message = json.loads(message_json)
                 except json.decoder.JSONDecodeError:
                     logger.error("Error decoding message: `%s`", message_json, exc_info=True)
-                    return
+                    continue
 
             except websocket.WebSocketTimeoutException:
                 continue
