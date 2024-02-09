@@ -121,6 +121,9 @@ class Tab(object):
             try:
                 self._ws.settimeout(1)
                 message_json = self._ws.recv()
+                if self.debug:  # pragma: no cover
+                    print("< RECV %s" % message_json)
+
                 message = json.loads(message_json)
             except websocket.WebSocketTimeoutException:
                 continue
@@ -129,9 +132,6 @@ class Tab(object):
                     logger.error("websocket exception", exc_info=True)
                     self._stopped.set()
                 return
-
-            if self.debug:  # pragma: no cover
-                print("< RECV %s" % message_json)
 
             if "method" in message:
                 self.event_queue.put(message)
