@@ -124,7 +124,12 @@ class Tab(object):
                 if self.debug:  # pragma: no cover
                     print("< RECV %s" % message_json)
 
-                message = json.loads(message_json)
+                try:
+                    message = json.loads(message_json)
+                except json.decoder.JSONDecodeError:
+                    logger.error("Error decoding message: `%s`", message_json, exc_info=True)
+                    return
+
             except websocket.WebSocketTimeoutException:
                 continue
             except (websocket.WebSocketException, OSError):
